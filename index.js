@@ -5,6 +5,7 @@ const tmp = require('tmp')
 const app = require('express')()
 const execute = require('child_process').exec
 const bodyParser = require('body-parser')
+const bodyLimit = '50mb'
 const port = 3000
 const exec = command => {
   return new Promise((resolve, reject) => {
@@ -16,7 +17,7 @@ const exec = command => {
   })
 }
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: bodyLimit}))
 
 app.post('/', (req, res) => {
   const temp = tmp.dirSync({unsafeCleanup: true})
