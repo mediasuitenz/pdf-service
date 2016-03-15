@@ -1,0 +1,28 @@
+{
+  "name": "pdf-service",
+  "version": "1.0.0",
+  "description": "HTML to PDF Service with ability to merge PDFs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonathan Prince <jonathan.prince@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mediasuitenz/pdf-service.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "pdf",
+    "html",
+    "merge",
+    "docker",
+    "ghostscript",
+    "wkhtmltopdf"
+  ],
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "tmp": "0.0.28"
+  }
+}
