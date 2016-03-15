@@ -9,8 +9,8 @@ The request body should be JSON with the following structure:
 {
   "html": "<html string to be converted into pdf>",
   "attachments": [
-    "<base64 string of first pdf to be appended to final pdf output",
-    "<base64 string of second pdf to be appended to final pdf output"
+    "<base64 string of first pdf to be appended to final pdf output>",
+    "<base64 string of second pdf to be appended to final pdf output>"
   ]
 }
 ```
