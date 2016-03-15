@@ -24,18 +24,18 @@ app.post('/', (req, res) => {
   const attachments = req.body.attachments
 
   // save html in temporary file
-  fs.writeFile(`${temp.name}/html`, req.body.html, err => {
+  fs.writeFile(`${temp.name}/html.html`, req.body.html, err => {
     if (err) res.send(err)
 
     // convert html to pdf
-    exec(`wkhtmltopdf ${temp.name}/html ${temp.name}/pdf`)
+    exec(`wkhtmltopdf ${temp.name}/html.html ${temp.name}/html.pdf`)
       .then(() => {
-        const filelist = [`${temp.name}/pdf`]
+        const filelist = [`${temp.name}/html.pdf`]
 
         if (attachments) {
           // create a temp file for each pdf to attach
           attachments.forEach((base64, i) => {
-            const filename = `${temp.name}/pdf${i}`
+            const filename = `${temp.name}/html.pdf${i}`
             filelist.push(filename)
             fs.writeFileSync(filename, new Buffer(base64, 'base64'))
           })
@@ -44,18 +44,25 @@ app.post('/', (req, res) => {
       })
       .then(filelist => {
         if (filelist.length === 1) {
-          return exec(`mv ${temp.name}/pdf ${temp.name}/output`)
+          // rename single pdf
+          return exec(`mv ${temp.name}/html.pdf ${temp.name}/output.pdf`)
         } else {
           // merge pdfs with ghostscript
-          let cmd = `gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=${temp.name}/output ${filelist.join(' ')}`
+          let cmd = [
+            'gs -dBATCH',
+            '-dNOPAUSE -q',
+            '-sDEVICE=pdfwrite',
+            `-sOutputFile=${temp.name}/output.pdf`
+          ].concat(filelist).join(' ')
           return exec(cmd)
         }
       })
       .then(() => {
         res.set('Content-Type', 'application/pdf')
-        fs.createReadStream(`${temp.name}/output`).pipe(res)
+        fs.createReadStream(`${temp.name}/output.pdf`)
+            .pipe(res)
+            .on('end', () => temp.removeCallback())
       })
-      .then(() => temp.removeCallback())
       .catch(err => res.send(err))
   })
 })
