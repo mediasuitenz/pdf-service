@@ -1,6 +1,6 @@
 {
   "name": "pdf-service",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HTML to PDF Service with ability to merge PDFs",
   "main": "index.js",
   "scripts": {
