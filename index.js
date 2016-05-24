@@ -51,17 +51,28 @@ app.post('/', (req, res) => {
       .then(filelist => {
         if (filelist.length === 1) {
           // rename single pdf
-          return exec(`mv ${temp.name}/html.pdf ${temp.name}/output.pdf`)
+          return exec(`mv ${temp.name}/html.pdf ${temp.name}/pre-stamp.pdf`)
         } else {
           // merge pdfs with ghostscript
           let cmd = [
             'gs -dBATCH',
             '-dNOPAUSE -q',
             '-sDEVICE=pdfwrite',
-            `-sOutputFile=${temp.name}/output.pdf`
+            `-sOutputFile=${temp.name}/pre-stamp.pdf`
           ].concat(filelist).join(' ')
           return exec(cmd)
         }
+      })
+      .then(() => {
+        let cmd = [
+          'gs -dBATCH',
+          '-dNOPAUSE -q',
+          '-sDEVICE=pdfwrite',
+          `-sOutputFile=${temp.name}/output.pdf`,
+          `stamp.ps`,
+          `${temp.name}/pre-stamp.pdf`
+        ].join(' ')
+        return exec(cmd)
       })
       .then(() => {
         res.set('Content-Type', 'application/pdf')
