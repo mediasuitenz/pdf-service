@@ -6,7 +6,7 @@ const app = require('express')()
 const execute = require('child_process').exec
 const bodyParser = require('body-parser')
 const bodyLimit = '50mb'
-const port = 3000
+const port = process.argv[2] || 3000
 const exec = command => {
   return new Promise((resolve, reject) => {
     execute(command, (err, stdout, stderr) => {
