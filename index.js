@@ -28,6 +28,7 @@ app.use(bodyParser.json({limit: bodyLimit}))
 app.post('/', (req, res) => {
   const temp = tmp.dirSync({unsafeCleanup: true})
   const attachments = req.body.attachments
+  const stamp = req.body.stamp
 
   // save html in temporary file
   fs.writeFile(`${temp.name}/html.html`, req.body.html, err => {
@@ -64,15 +65,20 @@ app.post('/', (req, res) => {
         }
       })
       .then(() => {
-        let cmd = [
-          'gs -dBATCH',
-          '-dNOPAUSE -q',
-          '-sDEVICE=pdfwrite',
-          `-sOutputFile=${temp.name}/output.pdf`,
-          `stamp.ps`,
-          `${temp.name}/pre-stamp.pdf`
-        ].join(' ')
-        return exec(cmd)
+        if (!stamp) {
+          return exec(`mv ${temp.name}/pre-stamp.pdf ${temp.name}/output.pdf`)
+        } else {
+          // add stamp to each page
+          let cmd = [
+            'gs -dBATCH',
+            '-dNOPAUSE -q',
+            '-sDEVICE=pdfwrite',
+            `-sOutputFile=${temp.name}/output.pdf`,
+            `${stamp}-stamp.ps`,
+            `${temp.name}/pre-stamp.pdf`
+          ].join(' ')
+          return exec(cmd)
+        }
       })
       .then(() => {
         res.set('Content-Type', 'application/pdf')
