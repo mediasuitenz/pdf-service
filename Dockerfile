@@ -15,6 +15,8 @@ RUN apt-get update && apt-get -y install ghostscript && apt-get clean
 
 COPY ./* ./
 
-CMD npm install && node .
+RUN npm install
+
+CMD node .
 
 EXPOSE 80

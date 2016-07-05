@@ -20,6 +20,10 @@ The body size is currently limited to `50mb`.
 
 The docker container exposes port 80 which should be forwarded to the node service which is listening on port 3000.
 
+## Building the Docker image
+
+```docker build -t mediasuite/pdf-service .```
+
 ## Running the Docker image
 
 ```docker run -d -p 80:3000 mediasuite/pdf-service```
