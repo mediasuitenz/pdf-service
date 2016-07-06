@@ -34,8 +34,15 @@ app.post('/', (req, res) => {
   fs.writeFile(`${temp.name}/html.html`, req.body.html, err => {
     if (err) res.send(err)
 
+    const htmlToPdf = [
+      'wkhtmltopdf',
+      '--margin-bottom "30mm"',
+      `${temp.name}/html.html`,
+      `${temp.name}/html.pdf`
+    ].join(' ')
+
     // convert html to pdf
-    exec(`wkhtmltopdf ${temp.name}/html.html ${temp.name}/html.pdf`)
+    exec(htmlToPdf)
       .then(() => {
         const filelist = [`${temp.name}/html.pdf`]
 
@@ -68,16 +75,24 @@ app.post('/', (req, res) => {
         if (!stamp) {
           return exec(`mv ${temp.name}/pre-stamp.pdf ${temp.name}/output.pdf`)
         } else {
+          // add text to template
+          const addText = [
+            'sed',
+            `-e "s/<STAMP_LINE_ONE>/${stamp.lineOne}/"`,
+            `-e "s/<STAMP_LINE_TWO>/${stamp.lineTwo}/"`,
+            `< stamp.template.ps >`,
+            `${temp.name}/stamp.ps`
+          ].join(' ')
           // add stamp to each page
-          let cmd = [
+          const addStamp = [
             'gs -dBATCH',
             '-dNOPAUSE -q',
             '-sDEVICE=pdfwrite',
             `-sOutputFile=${temp.name}/output.pdf`,
-            `${stamp}-stamp.ps`,
+            `${temp.name}/stamp.ps`,
             `${temp.name}/pre-stamp.pdf`
           ].join(' ')
-          return exec(cmd)
+          return exec(addText).then(() => exec(addStamp))
         }
       })
       .then(() => {
