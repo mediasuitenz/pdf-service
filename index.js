@@ -36,7 +36,7 @@ app.post('/', (req, res) => {
 
     const htmlToPdf = [
       'wkhtmltopdf',
-      '--margin-bottom "30mm"',
+      '--margin-bottom "23mm"',
       `${temp.name}/html.html`,
       `${temp.name}/html.pdf`
     ].join(' ')
