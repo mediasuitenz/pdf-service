@@ -4,8 +4,9 @@ const mw = require('./lib/middleware')
 const actions = require('./lib/actions')
 const app = require('express')()
 const bodyParser = require('body-parser')
-const bodyLimit = '50mb'
-const port = process.argv[2] || 3000
+const argv = require('minimist')(process.argv.slice(2))
+const bodyLimit = argv.limit || '50mb'
+const port = argv.port || 3000
 
 app.use(mw.setHeaders)
 app.use(bodyParser.json({limit: bodyLimit}))
