@@ -13,7 +13,7 @@ RUN gdebi --n wkhtmltox-0.12.2_linux-trusty-amd64.deb
 # install ghostscript
 RUN apt-get update && apt-get -y install ghostscript && apt-get clean
 
-COPY ./* ./
+COPY ./ ./
 
 RUN npm install
 
