@@ -18,6 +18,7 @@ app.use(mw.mergeFileList)
 app.use(mw.createPostscript)
 app.use(mw.addStamp)
 
+app.get('/ping', actions.ping)
 app.post('/', actions.sendFile)
 
 app.listen(port, () => console.log('server listening on port %d', port))
