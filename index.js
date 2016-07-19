@@ -17,6 +17,7 @@ app.use(mw.createFileList)
 app.use(mw.mergeFileList)
 app.use(mw.createPostscript)
 app.use(mw.addStamp)
+app.use(mw.errorHandler)
 
 app.get('/ping', actions.ping)
 app.post('/', actions.sendFile)
