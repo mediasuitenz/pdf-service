@@ -21,6 +21,6 @@ COPY . .
 
 RUN npm install
 
-CMD node .
+CMD ["node", "."]
 
 EXPOSE 80
