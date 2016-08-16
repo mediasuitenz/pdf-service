@@ -15,7 +15,7 @@ app.use(mw.writeHtmlFile)
 app.use(mw.convertHtmlToPdf)
 app.use(mw.createFileList)
 app.use(mw.mergeFileList)
-app.use(mw.createPostscript)
+app.use(mw.createPdfStamp)
 app.use(mw.addStamp)
 app.use(mw.errorHandler)
 

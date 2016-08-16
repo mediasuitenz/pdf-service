@@ -2,7 +2,7 @@
 
 ## Usage
 
-This service currently has a single endpoint `/` which accepts a POST request.
+To use the service send a POST request to `/`.
 
 The request body should be JSON with the following structure:
 ```
@@ -12,10 +12,7 @@ The request body should be JSON with the following structure:
     "<base64 string of first pdf to be appended to final pdf output>",
     "<base64 string of second pdf to be appended to final pdf output>"
   ],
-  "stamp": {
-    "lineOne": "<first line of footer stamp>",
-    "lineTwo": "<second line of footer stamp>"
-  }
+  "stamp": "html string for stamping each page of merged pdf"
 }
 ```
 The `attachments` and `stamp` keys are optional.
@@ -23,6 +20,8 @@ The `attachments` and `stamp` keys are optional.
 The default body size limits to a maximum of `50mb`.
 
 The docker container exposes port 80 which should be forwarded to the node service which is listening on port 3000.
+
+To check if the service is running, send a GET request to `/ping`.
 
 ## Building the Docker image
 
@@ -37,7 +36,7 @@ The docker container exposes port 80 which should be forwarded to the node servi
 This module can of course be run locally without Docker, however you will need to install the following dependencies:
 
  - **wkhtmltopdf**
- - **ghostscript**
+ - **pdftk**
 
 After pulling down this repo and running `npm install` you can start the service using default settings with `node .`, there are currently two optional args `--port` and `--limit` for setting the port to listen on and maximum allowed body size for the request.
 
