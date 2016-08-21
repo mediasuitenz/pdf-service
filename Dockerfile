@@ -17,9 +17,11 @@ RUN build_deps="build-essential xorg libssl-dev libxrender-dev wget gdebi" \
   && rm -rf /var/lib/apts/lists/* \
   && apt-get purge -y --auto-remove $build_deps
 
-COPY . .
+COPY package.json .
 
 RUN npm install
+
+COPY . .
 
 CMD ["node", "."]
 
