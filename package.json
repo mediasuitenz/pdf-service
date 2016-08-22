@@ -4,7 +4,8 @@
   "description": "HTML to PDF Service with ability to merge PDFs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker": "./scripts/docker.sh"
   },
   "author": "Jonathan Prince <jonathan.prince@gmail.com>",
   "repository": {

@@ -27,6 +27,12 @@ To check if the service is running, send a GET request to `/ping`.
 
 `docker build -t mediasuite/pdf-service:<version_tag> .`
 
+You can build and push to Docker Hub with a timestamped tag with the following command:
+
+`npm run docker`
+
+This will also push a matching image with the `latest` tag.
+
 ## Running the Docker image
 
 `docker run -d -p 80:3000 mediasuite/pdf-service:<version_tag>`
