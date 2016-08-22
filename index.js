@@ -8,6 +8,8 @@ const argv = require('minimist')(process.argv.slice(2))
 const bodyLimit = argv.limit || '50mb'
 const port = argv.port || 3000
 
+app.get('/ping', actions.ping)
+
 app.use(mw.setHeaders)
 app.use(bodyParser.json({limit: bodyLimit}))
 app.use(mw.setupTemp)
@@ -19,7 +21,6 @@ app.use(mw.createPdfStamp)
 app.use(mw.addStamp)
 app.use(mw.errorHandler)
 
-app.get('/ping', actions.ping)
 app.post('/', actions.sendFile)
 
 app.listen(port, () => console.log('server listening on port %d', port))
