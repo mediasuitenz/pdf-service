@@ -37,6 +37,14 @@ This will also push a matching image with the `latest` tag.
 
 `docker run -d -p 80:3000 mediasuite/pdf-service:<version_tag>`
 
+### Overriding defaults when starting the Docker image
+
+The default command that is used when starting the docker image as above will be `node .`, this can be overridden by specifying the command when running the image. Example:
+
+`docker run -d -p 80:3000 mediasuite/pdf-service:<version_tag> node . --limit=150mb`
+
+This starts the image and runs the app setting the max. body size to 150mb.
+
 ## Running locally without Docker
 
 This module can of course be run locally without Docker, however you will need to install the following dependencies:
