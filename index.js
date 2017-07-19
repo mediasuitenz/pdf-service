@@ -10,16 +10,18 @@ const port = argv.port || 3000
 
 app.get('/ping', actions.ping)
 
-app.use(mw.setHeaders)
-app.use(bodyParser.json({limit: bodyLimit}))
-app.use(mw.setupTemp)
-app.use(mw.writeHtmlFile)
-app.use(mw.convertHtmlToPdf)
-app.use(mw.createFileList)
-app.use(mw.mergeFileList)
-app.use(mw.createPdfStamp)
-app.use(mw.addStamp)
-app.use(mw.errorHandler)
+app.use('/', [
+  mw.setHeaders,
+  bodyParser.json({ limit: bodyLimit }),
+  mw.setupTemp,
+  mw.writeHtmlFile,
+  mw.convertHtmlToPdf,
+  mw.createFileList,
+  mw.mergeFileList,
+  mw.createPdfStamp,
+  mw.addStamp,
+  mw.errorHandler
+])
 
 app.post('/', actions.sendFile)
 
