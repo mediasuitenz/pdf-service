@@ -27,13 +27,12 @@ jobs:
           key: docker1-{{ .Branch }}-{{ epoch }}
           paths:
             - ~/cache/image.tar
-      - run:
-          name: Tag Docker image
-          command: docker tag pdf-service:latest pdf-service:"$CIRCLE_BUILD_NUM"
-      - run:
-          command: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
       - deploy:
-          command: docker push pdf-service:"$CIRCLE_BUILD_NUM"
+          name: Push Docker image
+          command: |
+            echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
+            docker tag pdf-service:latest "$DOCKER_REPO:$CIRCLE_BUILD_NUM"
+            docker push "$DOCKER_REPO:$CIRCLE_BUILD_NUM"
 
 workflows:
   version: 2
