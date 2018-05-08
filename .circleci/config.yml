@@ -33,7 +33,7 @@ jobs:
       - run:
           command: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
       - deploy:
-        command: docker push pdf-service:"$CIRCLE_BUILD_NUM"
+          command: docker push pdf-service:"$CIRCLE_BUILD_NUM"
 
 workflows:
   version: 2
