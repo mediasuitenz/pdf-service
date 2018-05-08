@@ -1,2 +1,4 @@
+.circleci
 .git
+.gitignore
 node_modules
