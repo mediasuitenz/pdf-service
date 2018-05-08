@@ -1,6 +1,6 @@
 FROM nodesource/trusty:LTS
 
-MAINTAINER Jonathan Prince <jonathan.prince@gmail.com>
+LABEL maintainer="Jonathan Prince <jonathan.prince@gmail.com>"
 
 # no tty
 ARG DEBIAN_FRONTEND=noninteractive
