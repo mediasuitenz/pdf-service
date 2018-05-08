@@ -31,7 +31,9 @@ jobs:
           name: Push Docker image
           command: |
             echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
+            docker tag pdf-service:latest "$DOCKER_REPO:latest"
             docker tag pdf-service:latest "$DOCKER_REPO:$CIRCLE_BUILD_NUM"
+            docker push "$DOCKER_REPO:latest"
             docker push "$DOCKER_REPO:$CIRCLE_BUILD_NUM"
 
 workflows:
