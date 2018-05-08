@@ -19,7 +19,11 @@ RUN build_deps="build-essential xorg libssl-dev libxrender-dev wget gdebi" \
 
 COPY package.json .
 
-RUN npm install
+RUN npm install \
+  && rm -rf \
+    ~/.node-gyp \
+    ~/.npm \
+    /tmp/*
 
 COPY . .
 
