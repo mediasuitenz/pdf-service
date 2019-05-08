@@ -4,7 +4,7 @@
   "description": "HTML to PDF Service with ability to merge PDFs",
   "main": "index.js",
   "engines": {
-    "node": "=4.6.0"
+    "node": "=10.15.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
