@@ -1,29 +1,42 @@
-FROM nodesource/trusty:LTS
+FROM ubuntu:xenial-20190425
 
 LABEL maintainer="Jonathan Prince <jonathan.prince@gmail.com>"
 
 # no tty
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN sed 's/main$/main universe/' -i /etc/apt/sources.list
-
-# Install pdftk, download and install wkhtmltopdf
-RUN build_deps="build-essential xorg libssl-dev libxrender-dev wget gdebi" \
+RUN build_deps="apt-utils curl" \
   && apt-get update \
-  && apt-get install -y --force-yes --no-install-recommends $build_deps pdftk \
-  && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb \
-  && gdebi --n wkhtmltox-0.12.2.1_linux-trusty-amd64.deb \
-  && rm -f wkhtmltox-0.12.2.1_linux-trusty-amd64.deb \
+  && apt-get install -y --no-install-recommends \
+    $build_deps \
+    ca-certificates \
+    pdftk \
+    fontconfig \
+    libfreetype6 \
+    libjpeg-turbo8 \
+    libpng12-0 \
+    libx11-6 \
+    libxcb1 \
+    libxext6 \
+    libxrender1 \
+    xfonts-75dpi \
+    xfonts-base \
+  && curl -sL https://deb.nodesource.com/setup_4.x -o nodesource_setup.sh \
+  && bash nodesource_setup.sh \
+  && apt-get install -y --no-install-recommends nodejs \
+  && curl -sL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.xenial_amd64.deb -o wkhtmltox_0.12.5-1.xenial_amd64.deb \
+  && dpkg -i wkhtmltox_0.12.5-1.xenial_amd64.deb \
+  && rm nodesource_setup.sh wkhtmltox_0.12.5-1.xenial_amd64.deb \
   && rm -rf /var/lib/apts/lists/* \
-  && apt-get purge -y --auto-remove $build_deps
+  && apt-get purge -y --auto-remove $build_deps \
+  && mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app/
 
 COPY package.json .
 
 RUN npm install \
-  && rm -rf \
-    ~/.node-gyp \
-    ~/.npm \
-    /tmp/*
+  && rm -rf ~/.npm/ /tmp/npm*
 
 COPY . .
 
