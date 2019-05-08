@@ -1,4 +1,6 @@
 .circleci
+.dockerignore
 .git
 .gitignore
+Dockerfile
 node_modules

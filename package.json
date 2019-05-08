@@ -3,6 +3,9 @@
   "version": "2.0.2",
   "description": "HTML to PDF Service with ability to merge PDFs",
   "main": "index.js",
+  "engines": {
+    "node": "=10.15.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docker": "./scripts/docker.sh"
