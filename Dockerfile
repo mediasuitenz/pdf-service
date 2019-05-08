@@ -21,7 +21,7 @@ RUN build_deps="apt-utils curl" \
     libxrender1 \
     xfonts-75dpi \
     xfonts-base \
-  && curl -sL https://deb.nodesource.com/setup_4.x -o nodesource_setup.sh \
+  && curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh \
   && bash nodesource_setup.sh \
   && apt-get install -y --no-install-recommends nodejs \
   && curl -sL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.xenial_amd64.deb -o wkhtmltox_0.12.5-1.xenial_amd64.deb \
