@@ -9,13 +9,13 @@ The request body should be JSON with the following structure:
 {
   "html": "<html string to be converted into pdf>",
   "attachments": [
-    "<base64 string of first pdf to be appended to final pdf output>",
-    "<base64 string of second pdf to be appended to final pdf output>"
+    "<URL or base64 string of first pdf to be appended to final pdf output>",
+    "<URL or base64 string of second pdf to be appended to final pdf output>"
   ],
   "stamp": "html string for stamping each page of merged pdf"
 }
 ```
-The `attachments` and `stamp` keys are optional.
+The `attachments` and `stamp` keys are optional, URL must include protocol `http(s):`.
 
 The default body size limits to a maximum of `50mb`.
 
