@@ -5,8 +5,10 @@ LABEL maintainer="Media Suite <developers@mediasuite.co.nz>"
 # no tty
 ARG DEBIAN_FRONTEND=noninteractive
 
+# hadolint ignore=DL3008,SC2086
 RUN build_deps="apt-utils curl" \
   && apt-get update \
+  && apt-get upgrade -y \
   && apt-get install -y --no-install-recommends \
      $build_deps \
      ca-certificates \

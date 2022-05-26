@@ -5,6 +5,7 @@
 To use the service send a POST request to `/`.
 
 The request body should be JSON with the following structure:
+
 ```
 {
   "html": "<html string to be converted into pdf>",
@@ -15,6 +16,7 @@ The request body should be JSON with the following structure:
   "stamp": "html string for stamping each page of merged pdf"
 }
 ```
+
 The `attachments` and `stamp` keys are optional, URL must include protocol `http(s):`.
 
 The default body size limits to a maximum of `50mb`.
@@ -49,8 +51,8 @@ This starts the image and runs the app setting the max. body size to 150mb.
 
 This module can of course be run locally without Docker, however you will need to install the following dependencies:
 
- - **wkhtmltopdf**
- - **pdftk**
+- **wkhtmltopdf**
+- **pdftk**
 
 After pulling down this repo and running `npm install` you can start the service using default settings with `node .`, there are currently two optional args `--port` and `--limit` for setting the port to listen on and maximum allowed body size for the request.
 

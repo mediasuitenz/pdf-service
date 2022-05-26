@@ -1,7 +1,6 @@
 version: 2.1
 
 jobs:
-
   build_docker:
     docker:
       - image: docker:18.04.0-ce
