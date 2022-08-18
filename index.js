@@ -9,6 +9,7 @@ const winston = require("winston");
 const argv = require("minimist")(process.argv.slice(2));
 const bodyLimit = argv.limit || "50mb";
 const port = argv.port || 3000;
+const logLevel = argv.loglevel || "info";
 
 process.on("SIGINT", () => {
   console.info("Interrupted");
@@ -18,11 +19,14 @@ process.on("SIGINT", () => {
 const logger = winston.createLogger({
   transports: [
     new winston.transports.Console({
-      level: "info",
+      level: logLevel,
       json: true,
     }),
   ],
 });
+
+app.U = app.U || {};
+app.U.logger = logger;
 
 const morganJSONFormat = () =>
   JSON.stringify({
