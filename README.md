@@ -54,6 +54,6 @@ This module can of course be run locally without Docker, however you will need t
 - **wkhtmltopdf**
 - **pdftk**
 
-After pulling down this repo and running `npm install` you can start the service using default settings with `node .`, there are currently two optional args `--port` and `--limit` for setting the port to listen on and maximum allowed body size for the request.
+After pulling down this repo and running `npm install` you can start the service using default settings with `node .`, there are currently three optional args `--port`, `--limit`, and `--loglevel` for setting the port to listen on, maximum allowed body size for the request, and the log level.
 
 Example: `node . --port 3333 --limit 100mb` // sets the port to 3333 and max. body size to 100mb

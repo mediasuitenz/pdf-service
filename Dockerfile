@@ -32,7 +32,7 @@ RUN build_deps="apt-utils curl" \
 
 WORKDIR /app/
 
-COPY package.json .
+COPY package.json package-lock.json ./
 
 RUN npm install \
   && rm -rf ~/.npm/ /tmp/npm*
