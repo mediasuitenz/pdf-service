@@ -25,6 +25,10 @@ The docker container exposes port 80 which should be forwarded to the node servi
 
 To check if the service is running, send a GET request to `/ping`.
 
+# Docker
+
+Note: as of September 2023 the docker build is not working on M1/M2 macs.  If you are using apple silicon and you need the pdf-service running, skip straight ahead to the "Running locally without Docker" section.
+
 ## Building the Docker image
 
 `docker build -t mediasuite/pdf-service:<version_tag> .`
@@ -47,7 +51,7 @@ The default command that is used when starting the docker image as above will be
 
 This starts the image and runs the app setting the max. body size to 150mb.
 
-## Running locally without Docker
+# Running locally without Docker
 
 This module can of course be run locally without Docker, however you will need to install the following dependencies:
 
