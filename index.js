@@ -8,8 +8,8 @@ const morgan = require("morgan");
 const winston = require("winston");
 const argv = require("minimist")(process.argv.slice(2));
 const bodyLimit = argv.limit || "50mb";
-const port = argv.port || 3000;
-const logLevel = argv.loglevel || "info";
+const port = argv.port || 3002;
+const logLevel = argv.loglevel || "debug";
 
 process.on("SIGINT", () => {
   console.info("Interrupted");
